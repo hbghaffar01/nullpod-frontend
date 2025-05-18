@@ -18,7 +18,7 @@ You will be judged on the use of colors, fonts and ability of the component to w
 
 1. **Clone this repository:**
    ```sh
-   git clone https://github.com/repo-link
+   git clone git@github.com:hbghaffar01/nullpod-frontend.git
    cd Nullpod-Frontend
    ```
 2. **Install dependencies:**
