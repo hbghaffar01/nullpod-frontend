@@ -12,11 +12,12 @@ export default function DraggableChat({
     children: React.ReactNode;
     onClose: () => void;
 }) {
-    const dragRef = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+    const dragRef = useRef<HTMLDivElement>(null);
+
     const [isMinimized, setIsMinimized] = useState(false);
 
     return (
-        <Draggable handle=".handle" nodeRef={dragRef}>
+        <Draggable handle=".handle" nodeRef={dragRef as React.RefObject<HTMLElement>}>
             <Resizable
                 defaultSize={{ width: 500, height: 600 }}
                 minWidth={300}
@@ -37,7 +38,7 @@ export default function DraggableChat({
                             </button>
                         </div>
                     </div>
-                    {<div className="flex-1 overflow-y-auto">{children}</div>}
+                    {!isMinimized && <div className="flex-1 overflow-y-auto">{children}</div>}
                 </div>
             </Resizable>
         </Draggable>

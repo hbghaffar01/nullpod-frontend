@@ -6,9 +6,9 @@ export function useChat() {
     const [activeChatId, setActiveChatId] = useState<string | null>(null);
     const [messages, setMessages] = useState<{ [key: string]: TPost[] }>({});
 
-    const setActiveChat = (userId: string) => {
+    const setActiveChat = (userId: string | null) => {
         setActiveChatId(userId);
-        if (!messages[userId]) {
+        if (userId && !messages[userId]) {
             setMessages((prev) => ({ ...prev, [userId]: [] }));
         }
     };

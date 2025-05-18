@@ -10,6 +10,12 @@ import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion } from "framer-motion";
 import Picker from "emoji-picker-react";
 
+type EmojiClickData = {
+  emoji: string;
+  names?: string[];
+  unified?: string;
+};
+
 export default function ChatPage({ activeChatId }: { activeChatId: string | null }) {
   const socket = useSocket();
   const { messages, addMessage } = useChat();
@@ -45,7 +51,7 @@ export default function ChatPage({ activeChatId }: { activeChatId: string | null
   );
 
   const addNewReaction = useCallback(
-    ({ postId, emoji, userId }: { postId: string; emoji: any; userId: string }) => {
+    ({ postId, emoji, userId }: { postId: string; emoji: EmojiClickData; userId: string }) => {
       if (!activeChatId) return;
       const existingMessage = messages[activeChatId]?.find((msg) => msg.id === postId);
       if (!existingMessage) return;
@@ -96,7 +102,7 @@ export default function ChatPage({ activeChatId }: { activeChatId: string | null
     }
   };
 
-  const handleEmojiClick = (emojiData: any) => {
+  const handleEmojiClick = (emojiData: EmojiClickData) => {
     setMessage((prev) => prev + emojiData.emoji);
     setOpenPicker(false);
   };
